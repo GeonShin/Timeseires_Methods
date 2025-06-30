@@ -2,8 +2,13 @@ import torch
 from torch_geometric.nn.conv import HypergraphConv
 
 def apply_hypergraph_conv(x, hyperedge_index, hyperedge_weight=None, hyperedge_attr=None, out_channels=16):
+    
     """
     하이퍼그래프 컨볼루션 네트워크 (HGCN) 레이어를 적용합니다.
+
+    Contribution: HGCN은 고차원 관계를 모델링하여 노드 표현 학습을 강화하는 데 기여합니다.
+    Input: 입력은 노드 특징과 하이퍼엣지 구조 정보(선택적으로 하이퍼엣지 가중치 및 특징 포함)이며,
+    Output: 출력은 고차원 관계 정보가 통합된 새로운 노드 임베딩입니다.
 
     Args:
         x (torch.Tensor): (num_nodes, in_channels) 형태의 입력 노드 특징입니다.
@@ -18,6 +23,7 @@ def apply_hypergraph_conv(x, hyperedge_index, hyperedge_weight=None, hyperedge_a
     Returns:
         torch.Tensor: HGCN 레이어를 통과한 후의 (num_nodes, out_channels) 형태의 출력 노드 임베딩입니다.
     """
+    
     in_channels = x.size(1)
     # HypergraphConv 레이어를 초기화합니다. 어텐션(attention) 기능과 드롭아웃(dropout), 헤드(heads)를 사용합니다.
     conv = HypergraphConv(in_channels, out_channels, use_attention=True, dropout=0.2, heads=2)
