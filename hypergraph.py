@@ -96,8 +96,6 @@ if __name__ == "__main__":
     output = apply_hypergraph_conv(x, hyperedge_index, hyperedge_weight=hyperedge_weight,
                                    hyperedge_attr=hyperedge_attr, out_channels=output_channels)
     print("Output shape:", output.shape)
-    # 예상 결과: (3, 16)
-
 
 '''
 x.shape: torch.Size([3, 20])
